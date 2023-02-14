@@ -19,8 +19,9 @@ void loop()
   if(Serial.available() > 0)
   {
     int out=Serial.read();
-    analogWrite(Vout1, out);
-    analogWrite(Vout2, out);
+    analogWrite(Vinput, out);
+    //analogWrite(Vout1, out);
+    //analogWrite(Vout2, out);
     //Make analog readings with delay timeBase
     for(readingPtr = 0; readingPtr < arraySize; readingPtr++)
     {

@@ -16,7 +16,6 @@ import time as t
 import numpy as np
 import matplotlib.pyplot as plt
 
-#value=130
 
 arraySize=250
 serialPort=serial.Serial()
@@ -45,38 +44,32 @@ for value in range(0, 255):
         while ((inByte>0)&(byteCount<arraySize)):
     
             dataByte=serialPort.read()
-            print("Data byte =", dataByte)
             byteCount=byteCount+1
             data1.append(ord(dataByte))
-            print("Data 1 is:", data1)
             dataByte=serialPort.read()
             data2.append(ord(dataByte))
-            print("Data 2 is:", data2)
+        print("Data 2 is:", data2)
+        
+        deltaV.append(np.nanmean(data1)/255*5 - np.nanmean(data2)/255*5 )
+        V1.append(np.nanmean(data1)/255*5)
+        V2.append(np.nanmean(data2)/255*5)
+        
         if (byteCount==arraySize):
             dataRead=True
-    #data1out=np.zeros(arraySize)
-    #data2out=np.zeros(arraySize)
-    #arrayIndex=range(arraySize)
-    #for i in arrayIndex:
-        #data1out[i]=ord(data1[i])
-        #data2out[i]=ord(data2[i])
-    deltaV.append(np.mean(data1)/255*5 - np.mean(data2)/255*5 )
-    V1.append(np.mean(data1)/255*5)
-    V2.append(np.mean(data2)/255*5)
     serialPort.close()
 
-#Transform unicode encoding into integers
-#for i in arrayIndex:
-   #deltaVout[i]=ord(deltaV[i])
-   #V2out[i]=ord(V2[i])
 
 deltaV = np.array(deltaV)
 I = deltaV/0.995
+print("I is", I)
+print("V2 is:", V2)
 #Plot your analog output!
 f1=plt.figure()
 #plt.plot(deltaV, I, ".")
 plt.plot(V2,I,".")
+V2 = np.array(V2)
+V2_clean = V2[np.isfinite(V2)]
+I_clean = I[np.isfinite(np.array(I))]
 
-
-
-#np.savetxt('e7_p2_{}.csv'.format(str(value)), dataOut, delimiter = ",")
+np.savetxt('green2.csv'
+           , np.concatenate((V2_clean[:, np.newaxis], I_clean[:, np.newaxis]), axis=1), delimiter = ",")
