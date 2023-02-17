@@ -1,0 +1,12 @@
+Resistor 1 = 0.997k(on top)
+Resistor 2 = 0.995k
+Capacitor = 15.2 microF
+Blue lead = Vin
+Pin 3 = input into breadboard, output from Arduino
+Closest rail(very bottom) = input rail
+Connected A0 to LED side
+Connected A1 to capacitor side
+
+Troubleshooting circuit setup(LED not working):
+- Inputs and PWM is correct, but LED didn't light up
+- 0V going through R2

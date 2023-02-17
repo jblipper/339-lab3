@@ -1,6 +1,6 @@
 void setup() {
   pinMode(3, OUTPUT);
-  analogWrite(3, 250);
+  analogWrite(3, 50);
 
 }
 

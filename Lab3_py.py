@@ -71,5 +71,5 @@ V2 = np.array(V2)
 V2_clean = V2[np.isfinite(V2)]
 I_clean = I[np.isfinite(np.array(I))]
 
-np.savetxt('green2.csv'
+np.savetxt('blue1_run4.csv'
            , np.concatenate((V2_clean[:, np.newaxis], I_clean[:, np.newaxis]), axis=1), delimiter = ",")
